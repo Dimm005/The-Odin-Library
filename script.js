@@ -63,3 +63,11 @@ function fillBooksList(library) {
     };
 }
 
+// clear books list
+function clearBooksList() {
+    let elements = document.querySelectorAll(".book-element");
+    for (let elem of elements) {
+        elem.remove();
+    };
+}
+
