@@ -54,7 +54,7 @@ function createBookCardElement(book) {
 
 // fill books list depending on isList
 function fillBooksList(library) {
-    for (let book of myLibrary) {
+    for (let book of library) {
         if (isList) {
             createBookLineElement(book);
         } else {
@@ -71,3 +71,16 @@ function clearBooksList() {
     };
 }
 
+// show not read books
+function showNotRead() {
+    clearBooksList();
+    let library = myLibrary.filter((book) => !book.isRead);
+    fillBooksList(library);
+}
+
+// show read already books
+function showRead() {
+    clearBooksList();
+    let library = myLibrary.filter((book) => book.isRead);
+    fillBooksList(library);
+}
