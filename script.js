@@ -30,6 +30,7 @@ function addBookToLibrary(title, author, pages) {
 function createBookLineElement(book) {
     let bookList = document.getElementById("book-list");
     let bookLine = document.createElement("div");
+    bookLine.classList.add("book-element");
     bookLine.classList.add("line");
     bookList.appendChild(bookLine);
     let bookDescription = `"${book.title}" by ${book.author}, ${book.pages} pages, ${book.isRead ? "read already" : "not read yet"}`;
@@ -42,6 +43,7 @@ function createBookLineElement(book) {
 function createBookCardElement(book) {
     let bookList = document.getElementById("book-list");
     let bookCard = document.createElement("div");
+    bookCard.classList.add("book-element");
     bookCard.classList.add("card");
     bookCard.innerHTML = `<p><span>Title: </span>"${book.title}"</p>
         <p><span>Author: </span>${book.author}</p>
@@ -50,7 +52,7 @@ function createBookCardElement(book) {
     bookList.appendChild(bookCard);
 }
 
-// fill books list
+// fill books list depending on isList
 function fillBooksList(library) {
     for (let book of myLibrary) {
         if (isList) {
@@ -60,3 +62,4 @@ function fillBooksList(library) {
         };
     };
 }
+
