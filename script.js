@@ -1,5 +1,5 @@
 var myLibrary = []; // array to store book objects
-var isList = false; // should book view be shown as list or as set of cards
+var isList = false; // should book view be shown as list or as set of cards (default)
 
 // book object constructor
 function Book(title, author, pages) {
@@ -36,5 +36,17 @@ function createBookLineElement(book) {
     let para = document.createElement("p");
     para.innerText = bookDescription;
     bookLine.appendChild(para);
+}
+
+// create book card element
+function createBookCardElement(book) {
+    let bookList = document.getElementById("book-list");
+    let bookCard = document.createElement("div");
+    bookCard.classList.add("card");
+    bookCard.innerHTML = `<p><span>Title: </span>"${book.title}"</p>
+        <p><span>Author: </span>${book.author}</p>
+        <p><span>Pages: </span>${book.pages}</p>
+        <p><span>${book.isRead ? "read already" : "not read yet"}</span></p>`
+    bookList.appendChild(bookCard);
 }
 

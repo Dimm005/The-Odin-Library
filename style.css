@@ -28,6 +28,7 @@ main {
 }
 
 #book-list {
+    grid-area: book-list;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
