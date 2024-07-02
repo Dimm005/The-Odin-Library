@@ -1,0 +1,35 @@
+main {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    grid-template-areas:
+        "menu books books";
+}
+
+#menu {
+    grid-area: menu;
+}
+
+#books {
+    grid-area: books;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas:
+        "view sort"
+        "book-list book-list";
+}
+
+#view {
+    grid-area: view;
+}
+
+#sort {
+    grid-area: sort;
+}
+
+#book-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
