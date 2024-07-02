@@ -50,3 +50,13 @@ function createBookCardElement(book) {
     bookList.appendChild(bookCard);
 }
 
+// fill books list
+function fillBooksList(library) {
+    for (let book of myLibrary) {
+        if (isList) {
+            createBookLineElement(book);
+        } else {
+            createBookCardElement(book);
+        };
+    };
+}
