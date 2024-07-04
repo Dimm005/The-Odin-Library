@@ -153,8 +153,27 @@ readAlreadyBtn.addEventListener("click", () => {
 });
 
 removeAllBtn.addEventListener("click", () => {
-    
-    clearBooksList();
-    removeLibrary();
+    let removeAllDialog = document.getElementById("remove-dialog");
+    let removeYesBtn = document.getElementById("remove-yes");
+    let removeNoBtn = document.getElementById("remove-no");
+    removeAllDialog.showModal();
+    removeYesBtn.addEventListener("click", () => {
+        clearBooksList();
+        removeLibrary();
+        removeAllDialog.close();
+    });
+    removeNoBtn.addEventListener("click", () => {
+        removeAllDialog.close();
+    })  
 })
 
+/* Save and restore library in console
+let safe = [];
+for (let i = 0; i < myLibrary.length; i++) {
+    safe.push(myLibrary[i]);
+};
+
+for (let i = 0; i < safe.length; i++) {
+    myLibrary.push(safe[i]);
+};
+*/
