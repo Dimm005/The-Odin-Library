@@ -84,3 +84,47 @@ function showRead() {
     let library = myLibrary.filter((book) => book.isRead);
     fillBooksList(library);
 }
+
+// remove all books (clear the library)
+function removeLibrary() {
+    myLibrary = [];
+    localStorage.clear();
+}
+
+// sort library by title
+function sortByTitle(library) {
+    return library.sort((a, b) => {
+        if (a.title.toLowerCase() > b.title.toLowerCase()) {
+            return 1;
+        } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+            return -1;
+        };
+        return 0;
+    });
+}
+
+// sort library by author
+function sortByAuthor(library) {
+    return library.sort((a, b) => {
+        if (a.author.toLowerCase() > b.author.toLowerCase()) {
+            return 1;
+        } else if (a.author.toLowerCase() < b.author.toLowerCase()) {
+            return -1;
+        };
+        return 0;
+    });
+}
+
+// sort by time of adding (new first)
+function sortNewFirst(library) {
+    return library.sort((a, b) => {
+        return b.dateAdded - a.dateAdded;
+    });
+}
+
+// sort by time of adding (old first)
+function sortOldFirst(library) {
+    return library.sort((a, b) => {
+        return a.dateAdded - b.dateAdded;
+    });    
+}
