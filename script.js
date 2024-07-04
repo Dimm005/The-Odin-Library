@@ -131,3 +131,30 @@ function sortOldFirst(library) {
     });    
 }
 
+readLibrary();
+
+// add event listeners to buttons
+const allBooksBtn = document.getElementById("all-books");
+const notReadBtn = document.getElementById("not-read");
+const readAlreadyBtn = document.getElementById("read-already");
+const removeAllBtn = document.getElementById("remove-all");
+
+allBooksBtn.addEventListener("click", () => {
+    clearBooksList();
+    fillBooksList(myLibrary);
+});
+
+notReadBtn.addEventListener("click", () => {
+    showNotRead();
+});
+
+readAlreadyBtn.addEventListener("click", () => {
+    showRead();
+});
+
+removeAllBtn.addEventListener("click", () => {
+    
+    clearBooksList();
+    removeLibrary();
+})
+
