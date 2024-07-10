@@ -11,6 +11,11 @@ function Book(title, author, pages) {
     this.isRead = false;
 }
 
+// deep copy of array
+function arrayDeepCopy(arrayToCopy) {
+    return JSON.parse(JSON.stringify(arrayToCopy));
+}
+
 // save library to localStorage
 function saveLibrary() {
     localStorage.setItem("library", JSON.stringify(myLibrary));
@@ -25,6 +30,9 @@ function readLibrary() {
 function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages));
     saveLibrary();
+    currentLibrary = arrayDeepCopy(myLibrary);
+    clearBooksList();
+    fillBooksList(currentLibrary);
 }
 
 // create book line element
@@ -133,6 +141,9 @@ function sortOldFirst(library) {
 }
 
 readLibrary();
+currentLibrary = arrayDeepCopy(myLibrary);
+clearBooksList();
+fillBooksList(currentLibrary);
 
 // add event listeners to buttons
 const allBooksBtn = document.getElementById("all-books");
