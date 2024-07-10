@@ -143,6 +143,7 @@ function sortOldFirst(library) {
 
 readLibrary();
 currentLibrary = arrayDeepCopy(myLibrary);
+currentLibrary = sortByTitle(currentLibrary);
 clearBooksList();
 fillBooksList(currentLibrary);
 
@@ -190,6 +191,26 @@ viewOption.addEventListener("change", (e) => {
     } else {
         isList = true;
     };
+    fillBooksList(currentLibrary);
+});
+
+const sortOption = document.getElementById("sort");
+sortOption.addEventListener("change", (e) => {
+    switch (e.target.value) {
+        case "title":
+            currentLibrary = sortByTitle(currentLibrary);
+            break;
+        case "author":
+            currentLibrary = sortByAuthor(currentLibrary);
+            break;
+        case "new":
+            currentLibrary = sortNewFirst(currentLibrary);
+            break;
+        case "old":
+            currentLibrary = sortOldFirst(currentLibrary);
+            break;
+    };
+    clearBooksList();
     fillBooksList(currentLibrary);
 });
 
