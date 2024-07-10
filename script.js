@@ -85,20 +85,21 @@ function clearBooksList() {
 // show not read books
 function showNotRead() {
     clearBooksList();
-    let library = myLibrary.filter((book) => !book.isRead);
-    fillBooksList(library);
+    currentLibrary = myLibrary.filter((book) => !book.isRead);
+    fillBooksList(currentLibrary);
 }
 
 // show read already books
 function showRead() {
     clearBooksList();
-    let library = myLibrary.filter((book) => book.isRead);
-    fillBooksList(library);
+    currentLibrary = myLibrary.filter((book) => book.isRead);
+    fillBooksList(currentLibrary);
 }
 
 // remove all books (clear the library)
 function removeLibrary() {
     myLibrary = [];
+    currentLibrary = arrayDeepCopy(myLibrary);
     localStorage.clear();
 }
 
@@ -153,7 +154,8 @@ const removeAllBtn = document.getElementById("remove-all");
 
 allBooksBtn.addEventListener("click", () => {
     clearBooksList();
-    fillBooksList(myLibrary);
+    currentLibrary = arrayDeepCopy(myLibrary);
+    fillBooksList(currentLibrary);
 });
 
 notReadBtn.addEventListener("click", () => {
@@ -188,7 +190,7 @@ viewOption.addEventListener("change", (e) => {
     } else {
         isList = true;
     };
-    fillBooksList(myLibrary);
+    fillBooksList(currentLibrary);
 });
 
 
