@@ -23,8 +23,22 @@
             </dialog>
         </nav>
         <div id="books">
-            <div id="view">View</div>
-            <div id="sort">Sort</div>
+            <div id="view">
+                <legend>Show books as list or set of cards</legend>
+                <select name="books-view" id="view">
+                    <option value="cards" selected>Cards</option>
+                    <option value="list">List</option>
+                </select>
+            </div>
+            <div id="sort">
+                <legend>Sort books</legend>
+                <select name="sorting" id="sort">
+                    <option value="title" selected>By title</option>
+                    <option value="author">By author</option>
+                    <option value="new">New first</option>
+                    <option value="old">Old first</option>
+                </select>
+            </div>
             <div id="book-list"></div>
         </div>
     </main>

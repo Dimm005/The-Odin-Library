@@ -1,4 +1,5 @@
 var myLibrary = []; // array to store book objects
+var currentLibrary = []; // keeps current state of shown library (all, read or not etc.)
 var isList = false; // should book view be shown as list or as set of cards (default)
 
 // book object constructor
@@ -166,6 +167,21 @@ removeAllBtn.addEventListener("click", () => {
         removeAllDialog.close();
     })  
 })
+
+//add event listeners to view options
+const viewOption = document.getElementById("view");
+viewOption.addEventListener("change", (e) => {
+    clearBooksList();
+    if (e.target.value === "cards") {
+        isList = false;
+    } else {
+        isList = true;
+    };
+    fillBooksList(myLibrary);
+});
+
+
+
 
 /* Save and restore library in console
 let safe = [];
