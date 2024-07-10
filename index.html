@@ -15,7 +15,18 @@
             <button class="filter-button" id="all-books">All books</button>
             <button class="filter-button" id="not-read">Not read</button>
             <button class="filter-button" id="read-already">Read already</button>
-            <button id="add-new">Add new book</button>
+            <button id="add-new">Add a new book</button>
+            <dialog id="add-new-dialog">
+                <legend>Add a new book</legend>
+                <form id="new-book-form">
+                    <label for="new-title">Title</label>
+                    <input type="text" placeholder="Type a title" id="new-title" name="new-title">
+                    <label for="new-author">Author</label>
+                    <input type="text" placeholder="Type author name" id="new-author" name="new-author">
+                    <label for="new-pages">Number of pages</label>
+                    <input type="number" placeholder="Add number of pages" min="1" max="10000" id="new-pages" name="new-pages">
+                </form>
+            </dialog>
             <button id="remove-all">Remove All Books</button>
             <dialog id="remove-dialog">
                 <p>Are you sure you want to clear you library?</p>
