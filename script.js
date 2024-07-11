@@ -74,6 +74,48 @@ function createBookLineElement(book) {
     editButton.setAttribute("id", ("edit-" + book.dateAdded));
     editButton.innerText = "Edit book";
     bookLine.appendChild(editButton);
+    editButton.addEventListener("click", (e) => {
+        let editDialog = document.getElementById("edit-book-dialog");
+        editDialog.showModal();
+        editTitle = document.getElementById("edit-title");
+        editTitle.value = book.title;
+        editAuthor = document.getElementById("edit-author");
+        editAuthor.value = book.author;
+        editPages = document.getElementById("edit-pages");
+        editPages.value = book.pages;
+        editNotRead = document.getElementById("edit-not-read");
+        editRead = document.getElementById("edit-read");
+        if (book.isRead === true) {
+            editRead.setAttribute("checked", "checked");
+        } else {
+            editNotRead.setAttribute("checked", "checked");
+        };
+        let editCancelBtn = document.getElementById("cancel-edit");
+        editCancelBtn.addEventListener("click", () => {
+            editDialog.close();
+        });
+        let editSaveBtn = document.getElementById("save-edit");
+        editSaveBtn.addEventListener("click", () => {
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].dateAdded === book.dateAdded) {
+                    myLibrary[i].title = editTitle.value;
+                    myLibrary[i].author = editAuthor.value;
+                    myLibrary[i].pages = editPages.value;
+                    if (editRead.checked === true) {
+                        myLibrary[i].isRead = true;
+                    } else {
+                        myLibrary[i].isRead = false;
+                    };
+                    saveLibrary();
+                    clearBooksList();
+                    currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                    fillBooksList(currentLibrary);
+                    editDialog.close();
+                    break;
+                };
+            };
+        });
+    })
 
 
     const removeButton = document.createElement("button");
@@ -143,6 +185,48 @@ function createBookCardElement(book) {
     editButton.setAttribute("id", ("edit-" + book.dateAdded));
     editButton.innerText = "Edit book";
     bookCard.appendChild(editButton);
+    editButton.addEventListener("click", (e) => {
+        let editDialog = document.getElementById("edit-book-dialog");
+        editDialog.showModal();
+        editTitle = document.getElementById("edit-title");
+        editTitle.value = book.title;
+        editAuthor = document.getElementById("edit-author");
+        editAuthor.value = book.author;
+        editPages = document.getElementById("edit-pages");
+        editPages.value = book.pages;
+        editNotRead = document.getElementById("edit-not-read");
+        editRead = document.getElementById("edit-read");
+        if (book.isRead === true) {
+            editRead.setAttribute("checked", "checked");
+        } else {
+            editNotRead.setAttribute("checked", "checked");
+        };
+        let editCancelBtn = document.getElementById("cancel-edit");
+        editCancelBtn.addEventListener("click", () => {
+            editDialog.close();
+        });
+        let editSaveBtn = document.getElementById("save-edit");
+        editSaveBtn.addEventListener("click", () => {
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].dateAdded === book.dateAdded) {
+                    myLibrary[i].title = editTitle.value;
+                    myLibrary[i].author = editAuthor.value;
+                    myLibrary[i].pages = editPages.value;
+                    if (editRead.checked === true) {
+                        myLibrary[i].isRead = true;
+                    } else {
+                        myLibrary[i].isRead = false;
+                    };
+                    saveLibrary();
+                    clearBooksList();
+                    currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                    fillBooksList(currentLibrary);
+                    editDialog.close();
+                    break;
+                };
+            };
+        });
+    })
     
     const removeButton = document.createElement("button");
     removeButton.classList.add("remove-button");
@@ -352,13 +436,3 @@ function getBookId(elementId) {
 }
 
 
-/* Save and restore library in console
-let safe = [];
-for (let i = 0; i < myLibrary.length; i++) {
-    safe.push(myLibrary[i]);
-};
-
-for (let i = 0; i < safe.length; i++) {
-    myLibrary.push(safe[i]);
-};
-*/
