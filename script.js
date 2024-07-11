@@ -31,6 +31,7 @@ function addBookToLibrary(title, author, pages) {
     myLibrary.push(new Book(title, author, pages));
     saveLibrary();
     currentLibrary = arrayDeepCopy(myLibrary);
+    currentLibrary = sortByTitle(currentLibrary);
     clearBooksList();
     fillBooksList(currentLibrary);
 }
@@ -47,6 +48,61 @@ function createBookLineElement(book) {
     let para = document.createElement("p");
     para.innerText = bookDescription;
     bookLine.appendChild(para);
+
+    // add "Mark as read", "Edit" and "Remove" buttons
+    const markReadButton = document.createElement("button");
+    markReadButton.classList.add("mark-read-button");
+    markReadButton.setAttribute("id", ("mark-read-" + book.dateAdded));
+    markReadButton.innerText = "Mark as read";
+    bookLine.appendChild(markReadButton);
+    markReadButton.addEventListener("click", (e) => {
+        let bookId = getBookId(e.target.id);
+        for (let i = 0; i < myLibrary.length; i++) {
+            if (myLibrary[i].dateAdded.toString() === bookId) {
+                myLibrary[i].isRead = true;
+                saveLibrary();
+                clearBooksList();
+                currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                fillBooksList(currentLibrary);
+                break;
+            };
+        };
+    })
+
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.setAttribute("id", ("edit-" + book.dateAdded));
+    editButton.innerText = "Edit book";
+    bookLine.appendChild(editButton);
+
+
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-button");
+    removeButton.setAttribute("id", ("remove-" + book.dateAdded));
+    removeButton.innerText = "Remove book";
+    bookLine.appendChild(removeButton);
+    removeButton.addEventListener("click", (e) => {
+        let removeBookDialog = document.getElementById("remove-book-dialog");
+        removeBookDialog.showModal();
+        let removeBookNoBtn = document.getElementById("remove-book-no");
+        let removeBookYesBtn = document.getElementById("remove-book-yes");
+        removeBookNoBtn.addEventListener("click", () => {
+            removeBookDialog.close();
+        });
+        removeBookYesBtn.addEventListener("click", (e) => {
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].dateAdded.toString() === bookLine.id) {
+                    myLibrary.splice(i, 1);
+                    saveLibrary();
+                    clearBooksList();
+                    currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                    fillBooksList(currentLibrary);
+                    removeBookDialog.close();
+                    break;
+                };
+            };
+            })
+    })
 }
 
 // create book card element
@@ -61,6 +117,60 @@ function createBookCardElement(book) {
         <p><span>Pages: </span>${book.pages}</p>
         <p><span>${book.isRead ? "read already" : "not read yet"}</span></p>`
     bookList.appendChild(bookCard);
+
+    // add "Mark as read", "Edit" and "Remove" buttons
+    const markReadButton = document.createElement("button");
+    markReadButton.classList.add("mark-read-button");
+    markReadButton.setAttribute("id", ("mark-read-" + book.dateAdded));
+    markReadButton.innerText = "Mark as read";
+    bookCard.appendChild(markReadButton);
+    markReadButton.addEventListener("click", (e) => {
+        let bookId = getBookId(e.target.id);
+        for (let i = 0; i < myLibrary.length; i++) {
+            if (myLibrary[i].dateAdded.toString() === bookId) {
+                myLibrary[i].isRead = true;
+                saveLibrary();
+                clearBooksList();
+                currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                fillBooksList(currentLibrary);
+                break;
+            };
+        };
+    })
+    
+    const editButton = document.createElement("button");
+    editButton.classList.add("edit-button");
+    editButton.setAttribute("id", ("edit-" + book.dateAdded));
+    editButton.innerText = "Edit book";
+    bookCard.appendChild(editButton);
+    
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-button");
+    removeButton.setAttribute("id", ("remove-" + book.dateAdded));
+    removeButton.innerText = "Remove book";
+    bookCard.appendChild(removeButton);
+    removeButton.addEventListener("click", (e) => {
+        let removeBookDialog = document.getElementById("remove-book-dialog");
+        removeBookDialog.showModal();
+        let removeBookNoBtn = document.getElementById("remove-book-no");
+        let removeBookYesBtn = document.getElementById("remove-book-yes");
+        removeBookNoBtn.addEventListener("click", () => {
+            removeBookDialog.close();
+        });
+        removeBookYesBtn.addEventListener("click", (e) => {
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].dateAdded.toString() === bookCard.id) {
+                    myLibrary.splice(i, 1);
+                    saveLibrary();
+                    clearBooksList();
+                    currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
+                    fillBooksList(currentLibrary);
+                    removeBookDialog.close();
+                    break;
+                };
+            };
+            })
+    })
 }
 
 // fill books list depending on isList
@@ -85,14 +195,14 @@ function clearBooksList() {
 // show not read books
 function showNotRead() {
     clearBooksList();
-    currentLibrary = myLibrary.filter((book) => !book.isRead);
+    currentLibrary = sortByTitle(myLibrary.filter((book) => !book.isRead));
     fillBooksList(currentLibrary);
 }
 
 // show read already books
 function showRead() {
     clearBooksList();
-    currentLibrary = myLibrary.filter((book) => book.isRead);
+    currentLibrary = sortByTitle(myLibrary.filter((book) => book.isRead));
     fillBooksList(currentLibrary);
 }
 
@@ -155,7 +265,7 @@ const removeAllBtn = document.getElementById("remove-all");
 
 allBooksBtn.addEventListener("click", () => {
     clearBooksList();
-    currentLibrary = arrayDeepCopy(myLibrary);
+    currentLibrary = sortByTitle(arrayDeepCopy(myLibrary));
     fillBooksList(currentLibrary);
 });
 
@@ -194,6 +304,7 @@ viewOption.addEventListener("change", (e) => {
     fillBooksList(currentLibrary);
 });
 
+// add event listener to sorting options
 const sortOption = document.getElementById("sort");
 sortOption.addEventListener("change", (e) => {
     switch (e.target.value) {
@@ -214,7 +325,31 @@ sortOption.addEventListener("change", (e) => {
     fillBooksList(currentLibrary);
 });
 
+// add event listener to "Add a new book" button
+const addNewBook = document.getElementById("add-new");
+addNewBook.addEventListener("click", () => {
+    let addNewDialog = document.getElementById("add-new-dialog");
+    let cancelButton = document.getElementById("cancel-new");
+    let saveButton = document.getElementById("save-new");
+    addNewDialog.showModal();
+    cancelButton.addEventListener("click", () => {
+        addNewDialog.close();
+    });
+    saveButton.addEventListener("click", () => {
+        let newTitle = document.getElementById("new-title");
+        let newAuthor = document.getElementById("new-author");
+        let newPages = document.getElementById("new-pages");
+        addBookToLibrary(newTitle.value, newAuthor.value, Math.floor(newPages.value));
+        addNewDialog.close();
 
+        
+    })
+})
+
+// get book id (dateAdded) from buttons
+function getBookId(elementId) {
+    return elementId.match(/[0-9]/g).join("");
+}
 
 
 /* Save and restore library in console

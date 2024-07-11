@@ -24,12 +24,14 @@
                     <label for="new-author">Author</label>
                     <input type="text" placeholder="Type author name" id="new-author" name="new-author">
                     <label for="new-pages">Number of pages</label>
-                    <input type="number" placeholder="Add number of pages" min="1" max="10000" id="new-pages" name="new-pages">
+                    <input type="number" placeholder="Add number of pages" id="new-pages" name="new-pages">
+                    <button id="cancel-new">Cancel</button>
+                    <button id="save-new">Save</button>
                 </form>
             </dialog>
             <button id="remove-all">Remove All Books</button>
             <dialog id="remove-dialog">
-                <p>Are you sure you want to clear you library?</p>
+                <p class="sure">Are you sure you want to clear you library?</p>
                 <button id="remove-yes">Yes</button>
                 <button id="remove-no">No</button>
             </dialog>
@@ -51,7 +53,13 @@
                     <option value="old">Old first</option>
                 </select>
             </div>
-            <div id="book-list"></div>
+            <div id="book-list">
+                <dialog id="remove-book-dialog">
+                    <p class="sure">Are you sure to remove this book?</p>
+                    <button id="remove-book-no">No</button>
+                    <button id="remove-book-yes">Yes</button>
+                </dialog>
+            </div>
         </div>
     </main>
     <footer>
