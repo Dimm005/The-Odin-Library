@@ -1,8 +1,40 @@
+:root {
+    --header-light-background-color: #EAECE8;
+    --main-light-background-color: #fff;
+    --footer-light-background-color: #EAECE8;
+    --header-light-font-color: #7E8283;
+    --main-light-font-color: #7E8283;
+    --footer-light-font-color: #7E8283;
+    --button-light-color: #EAECE8;
+    --button-light-font-color: #7E8283;
+    --bookcard-light-background-color: #FFF;
+    --bookcard-light-border-color: #7E8283;
+}
+
+header {
+    background-color: var(--header-light-background-color);
+    color: var(--header-light-font-color);
+}
+
+footer {
+    background-color: var(--footer-light-background-color);
+    color: var(--footer-light-font-color);
+}
+
 main {
+    background-color: var(--main-light-background-color);
+    color: var(--main-light-font-color);
     display: grid;
     grid-template-columns: 100px 1fr 1fr;
     grid-template-areas:
         "menu books books";
+}
+
+button {
+    background-color: var(--button-light-color);
+    color: var(--button-light-font-color);
+    border-color: var(--button-light-color);
+    border-radius: 5px;
 }
 
 #menu {
@@ -27,6 +59,13 @@ main {
     grid-area: sort;
 }
 
+#sort-options {
+    background-color: var(--header-light-background-color);
+    color: var(--header-light-font-color);
+    border-color: var(--header-light-background-color);
+    border-radius: 5px;
+}
+
 #book-list {
     grid-area: book-list;
     display: flex;
@@ -34,3 +73,9 @@ main {
     flex-wrap: wrap;
 }
 
+.card {
+    background-color: var(--bookcard-light-background-color);
+    border: 2px solid;
+    border-color: var(--bookcard-light-border-color);
+    border-radius: 5px;
+}
