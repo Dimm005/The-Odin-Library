@@ -12,10 +12,10 @@
     </header>
     <main>
         <nav id="menu">
-            <button class="filter-button" id="all-books">All books</button>
-            <button class="filter-button" id="not-read">Not read</button>
-            <button class="filter-button" id="read-already">Read already</button>
-            <button id="add-new">Add a new book</button>
+            <button class="filter-button menu-button" id="all-books">All books</button>
+            <button class="filter-button menu-button" id="not-read">Not read</button>
+            <button class="filter-button menu-button" id="read-already">Read already</button>
+            <button class="menu-button" id="add-new">Add a new book</button>
             <dialog id="add-new-dialog">
                 <legend>Add a new book</legend>
                 <form id="new-book-form">
@@ -29,7 +29,7 @@
                     <button id="save-new">Save</button>
                 </form>
             </dialog>
-            <button id="remove-all">Remove All Books</button>
+            <button class="menu-button" id="remove-all">Remove All Books</button>
             <dialog id="remove-dialog">
                 <p class="sure">Are you sure you want to clear you library?</p>
                 <button id="remove-yes">Yes</button>
@@ -56,8 +56,8 @@
             <div id="book-list">
                 <dialog id="remove-book-dialog">
                     <p class="sure">Are you sure to remove this book?</p>
-                    <button id="remove-book-no">No</button>
                     <button id="remove-book-yes">Yes</button>
+                    <button id="remove-book-no">No</button>
                 </dialog>
                 <dialog id="edit-book-dialog">
                     <legend>Edit a book parameters</legend>
