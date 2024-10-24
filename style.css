@@ -1,4 +1,5 @@
 :root {
+    box-sizing: border-box;
     --header-light-background-color: #EAECE8;
     --main-light-background-color: #fff;
     --footer-light-background-color: #EAECE8;
@@ -16,6 +17,7 @@
 body {
     width: var(--body-width);
     margin: auto;
+    font-family: "Prociono", serif;
 }
 
 header {
@@ -24,6 +26,14 @@ header {
     border-radius: 5px;
     margin: 10px 0px;
     padding: 10px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    height: 100px;
+    box-sizing: border-box;
+    font-family: "Dancing Script", serif;
+    font-weight: 900;
+    font-size: 1.5em;
 }
 
 footer {
@@ -49,6 +59,7 @@ button {
     border-color: var(--button-light-color);
     border-radius: 5px;
     font-weight: 600;
+    font-family: "Prociono", serif;
 }
 
 .menu-button {
@@ -137,6 +148,7 @@ input {
     border: 2px solid;
     border-color: var(--bookcard-light-border-color);
     border-radius: 5px;
+    font-family: "Prociono", serif;
 }
 
 label {
@@ -145,4 +157,12 @@ label {
 
 p.sure {
     font-weight: 900;
+}
+
+#header-logo {
+    height: 50px;
+}
+
+select {
+    font-family: "Prociono", serif;
 }
